@@ -59,12 +59,12 @@ This repository contains a Python program that implements basic data structures 
 #### 3) Navigate to the directory containing the script.
 
 #### 4) Run the script using the following command:
+```markdown
 
-bash  
-Copy code  
 python script_name.py    
 
-*(Replace script_name.py with the actual name of the Python script.)*
+```
+**(Replace script_name.py with the actual name of the Python script.)*
 
 ## Note
 The program includes a simple menu system for user interaction.
