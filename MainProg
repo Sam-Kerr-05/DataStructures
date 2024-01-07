@@ -62,7 +62,7 @@ class Queue:
             self.point2_count = 1
             self.menu()
         else:
-            print("ERROR: EMPTY QUEUE")
+            print("ERROR: NOT ENOUGH ITEMS"")
             self.menu()
 
     def linearQ(self):
