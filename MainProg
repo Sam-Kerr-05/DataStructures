@@ -1,0 +1,292 @@
+import sys as s
+import time
+import random as rand
+
+class Queue:
+    def __init__(self):
+        self.Q = []
+        self.Mcount = 0
+        self.point1_count = 0
+        self.point2_count = 1
+        self.QC = 0
+        self.Q2 = []
+    def enQ(self):
+        add = int(input("\n ITEM TO ADD: "))
+        self.Q.append(add)
+        print("\n ADDED ", add, "\n")
+        self.QC += 1
+        self.menu()
+
+    def deQ(self):
+        if self.QC > 0:
+            removed = self.Q.pop(0)
+            print ("ITEM REMOVED: ", removed)
+            self.QC -= 1
+            self.menu()
+        else:
+            print("UNDERFLOW ERROR: QUEUE EMPTY")
+            self.menu()
+
+    def isEmpty(self):
+        if self.QC == 0:
+            print("\n TRUE \n ")
+            time.sleep(0.5)
+            self.menu()
+        else:
+            print("\n FALSE \n ")
+            time.sleep(0.5)
+            self.menu()
+    def size(self):
+        print("\n SIZE: ", self.QC)
+        self.menu()
+
+    def bubblesort(self):
+        self.Q2.extend(self.Q)
+        lenQ = len(self.Q2)
+        if lenQ > 1:
+            for i in range (lenQ):
+                for j in range(lenQ):
+                    if not self.Q2[self.point1_count] <= self.Q2[self.point2_count]:
+                        self.Q2[self.point1_count], self.Q2[self.point2_count] = self.Q2[self.point2_count], self.Q2[self.point1_count]
+                        self.point1_count += 1
+                        self.point2_count += 1
+                    else:
+                        self.point1_count += 1
+                        self.point2_count += 1
+                        if self.point1_count and self.point2_count == lenQ:
+                            self.point1_count = 0
+                            self.point2_count = 1
+            print("PRIORITY QUEUE:", self.Q2)
+            self.Q2 = []
+            self.point1_count = 0
+            self.point2_count = 1
+            self.menu()
+        else:
+            print("ERROR: EMPTY QUEUE")
+            self.menu()
+
+    def linearQ(self):
+        if self.QC > 0:
+            print("LINEAR QUEUE: ", self.Q)
+            self.menu()
+        else:
+            print("ERROR: EMPTY QUEUE ")
+            self.menu()
+
+    def formatmenu(self):
+        format = int(input("""
+        \n Q-Format Options: 
+         
+            1. [PRIORITY]
+              2. [LINEAR]
+                3. [EXIT] \n > """))
+        if format == 1:
+            self.bubblesort()
+        elif format == 2:
+            self.linearQ()
+        elif format == 3:
+            self.menu()
+    def menuMech(self,main_menu):
+        if main_menu == 1:
+            self.enQ()
+        elif main_menu == 2:
+            self.deQ()
+        elif main_menu == 3:
+            self.size()
+        elif main_menu == 4:
+            self.isEmpty()
+        elif main_menu == 5:
+            self.formatmenu()
+        elif main_menu == 6:
+            exit = input("Are you sure you want to exit, all values will be lost? y/n \n > ")
+            if exit == 'y' or exit == 'Y':
+                self.__init__()
+                menuCountOpen = 1
+                openMenu(menuCountOpen)
+            elif exit == 'n' or 'N':
+                self.menu()
+        else:
+            print("\n INVALID INPUT, TRY AGAIN... ")
+            self.menu()
+    def menu(self):
+        if self.Mcount == 0:
+            self.Mcount += 1
+            main_menu = int(input(""" 
+            Hello! Which option would you like to begin with?
+                1. [EnQueue] 
+                2. [DeQueue]
+                3. [Size] 
+                4. [IsEmpty]
+                5. [Format]
+                6. [Exit] \n > """))
+            self.menuMech(main_menu)
+        elif self.Mcount == 1:
+            main_menu = int(input(""" 
+            \n Pick an option: 
+                1. [En-Q]          2. [D-Q]         3. [Size] 
+                  4. [isEmpty]       5. [Format]      6. [Exit]\n > """))
+            self.menuMech(main_menu)
+
+class Stack:
+    def __init__(self):
+        self.stack = []
+        self.top = 0
+        self.menucount = 0
+        self.count = 0
+        self.emptycount = 0
+        self.randInt = 0
+        self.crazyStack = []
+
+    def randGen(self):
+        newRandInt = rand.random()
+        self.randInt += rand.random()
+
+    def push(self, item, itemCHECK):
+        self.stack.append(item)
+        self.top += 1
+        self.stackShow()
+        self.run()
+
+    def pop(self):
+        if self.top >= 1:
+            popped_item = self.stack.pop()
+            self.top -= 1
+            print("REMOVED: ", "[" + popped_item + "]")
+            self.stackShow()
+        else:
+            print("STACK IS EMPTY.")
+            self.emptycount += 1
+            if self.emptycount > 0:
+                print("RUNNING 'isEmpty' COMMAND TO CHECK STATUS...")
+                time.sleep(0.5)
+                self.isEmpty()
+                self.stackShow()
+            self.emptycount -= 1
+            self.run()
+
+    def isEmpty(self):
+        if self.top <= 0 and self.emptycount == 1:
+            print("TRUE")
+            time.sleep(0.5)
+            print("\n STATUS CHECKED. \n RESULT: EMPTY")
+        elif self.top <= 0 and self.emptycount == 0:
+            print("TRUE")
+        else:
+            print("FALSE")
+        time.sleep(0.5)
+        self.run()
+
+    def size(self):
+        print("SIZE: ", self.top)
+        self.stackShow()
+        self.run()
+
+    def stackShow(self):
+        reversed_stack = self.stack[::-1]
+        stringStack = ''
+        for stackprint in range(self.top):
+            iTem = (reversed_stack[self.count])
+            stringStack += ("\n " + "[" + iTem + "]")
+            self.count += 1
+        print("\n STACK: \n", stringStack)
+        self.count = 0
+        self.run()
+
+    def run(self):
+        if self.menucount == 0:
+            User_Input = int(input("""
+            What would you like to do?
+                1. [Push]
+                2. [Pop]
+                3. [IsEmpty]
+                4. [Size]
+                5. [Exit] \n > """))
+            self.menucount += 1
+            self.submenu(User_Input)
+        elif self.menucount > 0:
+            User_Input = int(input("""
+            Please Choose one of the numbers again: 
+                1. [Push]   2.  [Pop]  3.  [isEmpty]  4. [Size]  5. [Exit] \n > """))
+            self.submenu(User_Input)
+
+
+    def submenu(self, User_Input):
+        if User_Input == 1:
+            itemCHECK = True
+            item = input("ITEM TO ADD: ")
+            self.push(item, itemCHECK)
+        elif User_Input == 2:
+            self.pop()
+        elif User_Input == 3:
+            self.isEmpty()
+        elif User_Input == 4:
+            self.size()
+        elif User_Input == 5:
+            exit = input("Are you sure you want to exit, all values will be lost? y/n \n > ")
+            if exit == 'y' or exit == 'Y':
+                self.__init__()
+                menuCountOpen = 1
+                openMenu(menuCountOpen)
+            elif exit == 'n' or 'N':
+                self.run()
+        else:
+            print("INVALID INPUT. ")
+            self.run()
+
+
+def openMenumech(mainMenu):
+    if mainMenu == 1:
+        instance = Queue()
+        instance.menu()
+    elif mainMenu == 2:
+        instance = Stack()
+        instance.run()
+    elif mainMenu == 3:
+        print("\n GOODBYE :) \n")
+        s.exit()
+
+def openMenu(menuCountOpen):
+    if menuCountOpen == 0:
+        countCL = 0
+        strLine = ["Hello.", "Welcome", "to", "the", "Data", "Structures", "Terminal", "in", "Python!\n "]
+        parenthesis = [".", ".", ".\n"]
+        strSelection = ["Please", "choose", "an", "option", "from", "the", "numbers", "below:\n"]
+        lengthLine = len(strLine)
+        lengthSelection = len(strSelection)
+        for line in range(lengthLine):
+            print(''.join(strLine[countCL]), end=' ')
+            time.sleep(0.35)
+            countCL += 1
+        time.sleep(0.5)
+        countCL = 0
+        for parenthis in range(3):
+            print(''.join(parenthesis[countCL]), end=' ')
+            time.sleep(0.35)
+            countCL += 1
+        time.sleep(0.5)
+        countCL = 0
+        for selection in range(lengthSelection):
+            print(strSelection[countCL], end=' ')
+            time.sleep(0.35)
+            countCL += 1
+        time.sleep(0.5)
+        countCL = 0
+        mainMenu = int(input(
+        """ \n 
+               [1. Queues]
+               [2. Stacks]
+               [3. Quit  ] \n > """))
+        menuCountOpen += 1
+        openMenumech(mainMenu)
+    elif menuCountOpen == 1:
+        mainMenu = int(input(
+            """ \n WELCOME BACK ! \n
+
+                   [1. Queues]
+                   [2. Stacks]
+                   [3. Quit  ] \n > """))
+        openMenumech(mainMenu)
+
+menuCountOpen = 0
+openMenu(menuCountOpen=0)
+
