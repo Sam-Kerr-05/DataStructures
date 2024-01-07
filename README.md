@@ -52,7 +52,7 @@ This repository contains a Python program that implements basic data structures 
 >> --> Exits the program.
 
 ## Download
-[Download the Code](https://raw.githubusercontent.com/Sam-Kerr-05/DataStructures/main/MainProg)
+[Download the Code](https://raw.githubusercontent.com/Sam-Kerr-05/DataStructures/main/MainProg.py)
 
 ## How to Run
 #### 1) Clone the repository to your local machine.  
